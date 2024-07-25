@@ -13,15 +13,15 @@ for t in np.arange(0.0, 10.0, dt):
   y += ((math.sin(theta))*v)*dt
   theta += ((math.tan(s))/0.32)*dt
   f.write(str(t)+" "+str(x)+" "+str(y)+" "+str(v)+" "+str(s))
-  for i in np.arange(0.0, ((math.pi)*2.0)/4, 1.0):
+  for i in np.arange(0.0, ((math.pi)*2.0), 4.0 / (math.pi * 2)):
     d = -1
     
     for j in np.arange(0.0, 12.0, 0.25):
       if False:
         d = j
         break
-    f.write(" "+d)
-f.write(d+ "\n")
+    f.write(" " + str(d))
+  f.write("\n")
 
   
   
