@@ -32,8 +32,8 @@ for t in np.arange(0.0, 10.0, dt):
       if hasCollided:
         d = j
         break
-    f.write(" "+d)
-f.write(d+ "\n")
+    f.write(" " + str(d))
+  f.write("\n")
 
   
   
