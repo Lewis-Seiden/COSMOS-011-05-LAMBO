@@ -21,8 +21,9 @@ for t in np.arange(0.0, 10.0, dt):
     for j in np.arange(0.0, 12.0, 0.25):
       hasCollided = False
       for k in obs:
-        c = (theta + i)* j
-        isColliding = (math.sqrt((k[2]-y)**2+(k[1]-x)**2)) < k[0]
+        cx = math.cos((theta + i)* j)
+        cy = math.sin((theta + i)* j)
+        isColliding = (math.sqrt((k[2]-(y+cy))**2+(k[1]-(x+cx))**2)) < k[0]
 
         if isColliding: 
           hasCollided = True
