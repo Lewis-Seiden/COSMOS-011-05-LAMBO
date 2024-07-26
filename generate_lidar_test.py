@@ -1,5 +1,6 @@
 import numpy as np
 import math 
+import random
 f = open('test_log.log', 'w', encoding="utf-8")
 x = 0.0
 y = 0.0
@@ -11,6 +12,7 @@ s = 0.1
 obs = [(1.0,0.0,2.0), (1.0, 0.0, -2.0)]
 
 for t in np.arange(0.0, 20.0, dt):
+  s = (random.random() - 0.2) * 0.4
   x += ((math.cos(theta))*v)*dt
   y += ((math.sin(theta))*v)*dt
   theta += ((math.tan(s))/0.32)*dt*v
