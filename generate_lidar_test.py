@@ -7,13 +7,13 @@ log = csv.writer(f)
 x = 0.0
 y = 0.0
 theta = 0.0
-v = 0.75
-dt = 0.2
+v = 2.0
+dt = 0.1
 s = 0.05
 
-obs = [(1.0,0.0,2.0), (1.0, 0.0, -2.0)]#, (2.0, 12.0, 8.0)]
+obs = [(1.0,0.0,2.0), (1.0, 0.0, -2.0), (2.0, 12.0, 8.0)]
 
-for t in np.arange(0.0, 10.0, dt):
+for t in np.arange(0.0, 20.0, dt):
   res = []
   s = (random.random() - 0.2) * 0.4
   x += ((math.cos(theta))*v)*dt
@@ -23,12 +23,12 @@ for t in np.arange(0.0, 10.0, dt):
   for phi in np.linspace(0.0, ((math.pi)*2.0), 64, endpoint=False):
     d = 0
 
-    for j in np.linspace(0.0, 12.0, 100):
+    for j in np.linspace(0.0, 12.0, 1000):
       hasCollided = False
+      cx = math.cos((theta + phi))* j
+      cy = -math.sin((theta + phi))* j
       for k in obs:
-        cx = math.cos((theta + phi))* j
-        cy = -math.sin((theta + phi))* j
-        isColliding = ((k[2]-(y+cy))**2)+((k[1]-(x+cx))**2) < k[0]**2
+        isColliding = ((k[2]-(y+cy))**2)+((k[1]-(x+cx))**2) <= k[0]**2
 
         hasCollided |= isColliding
       if hasCollided:
