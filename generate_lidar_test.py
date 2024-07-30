@@ -9,11 +9,11 @@ y = 0.0
 theta = 0.0
 v = 0.75
 dt = 0.2
-s = 0.2
+s = 0.05
 
-obs = [(1.0,0.0,2.0), (1.0, 0.0, -2.0)]
+obs = [(1.0,0.0,2.0), (1.0, 0.0, -2.0)]#, (2.0, 12.0, 8.0)]
 
-for t in np.arange(0.0, 5.0, dt):
+for t in np.arange(0.0, 10.0, dt):
   res = []
   s = (random.random() - 0.2) * 0.4
   x += ((math.cos(theta))*v)*dt
