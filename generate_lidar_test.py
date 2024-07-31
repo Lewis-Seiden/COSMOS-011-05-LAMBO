@@ -21,7 +21,7 @@ for t in np.arange(0.0, 20.0, dt):
   theta += ((math.tan(s))/0.32)*dt*v
   res.extend([str(t),str(x),str(y),str(v),str(s)])
   for phi in np.linspace(0.0, ((math.pi)*2.0), 64, endpoint=False):
-    d = 0
+    d = 100.0 * random.random()
 
     for j in np.linspace(0.0, 12.0, 500):
       hasCollided = False
