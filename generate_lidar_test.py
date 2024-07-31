@@ -23,7 +23,7 @@ for t in np.arange(0.0, 20.0, dt):
   for phi in np.linspace(0.0, ((math.pi)*2.0), 64, endpoint=False):
     d = 0
 
-    for j in np.linspace(0.0, 12.0, 1000):
+    for j in np.linspace(0.0, 12.0, 500):
       hasCollided = False
       cx = math.cos((theta + phi))* j
       cy = -math.sin((theta + phi))* j
