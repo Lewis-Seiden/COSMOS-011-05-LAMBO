@@ -8,12 +8,12 @@ x = 0.0
 y = 0.0
 theta = 0.0
 v = 2.0
-dt = 0.1
+dt = 0.05
 s = 0.05
 
 obs = [(1.0,0.0,2.0), (1.0, 0.0, -2.0), (2.0, 12.0, 8.0)]
 
-for t in np.arange(0.0, 20.0, dt):
+for t in np.arange(0.0, 10.0, dt):
   res = []
   s = (random.random() - 0.2) * 0.4
   x += ((math.cos(theta))*v)*dt
@@ -23,7 +23,7 @@ for t in np.arange(0.0, 20.0, dt):
   for phi in np.linspace(0.0, ((math.pi)*2.0), 64, endpoint=False):
     d = 100.0 * random.random()
 
-    for j in np.linspace(0.0, 12.0, 500):
+    for j in np.linspace(0.0, 12.0, 1000):
       hasCollided = False
       cx = math.cos((theta + phi))* j
       cy = -math.sin((theta + phi))* j
