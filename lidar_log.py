@@ -74,26 +74,6 @@ def readLidarData(port, numPackets=38*3):
 
     return scan
 
-def save_lidar_data_to_csv(filename):
-    scan = readLidarData('/dev/ttyUSB0')
-    
-    if scan:
-        angles = np.linspace(scan['start_angle'], scan['end_angle'], 12)
-        x_coords = (scan['ranges'] * np.cos(np.deg2rad(angles))).reshape(-1, order='F') / 1000
-        y_coords = (scan['ranges'] * np.sin(np.deg2rad(angles))).reshape(-1, order='F') / 1000
-        print(np.vstack((x_coords, y_coords).T))
-        # Write data to CSV file
-        with open(filename, 'w', newline='') as csvfile:
-            csvwriter = csv.writer(csvfile)
-            csvwriter.writerow(['x', 'y'])
-            for x, y in zip(x_coords, y_coords):
-                csvwriter.writerow([float(x), float(y)])  # Ensure data is saved as plain floats
-        print(f"Data saved to {filename}")
-    else:
-        print("No data to save.")
-
-# Save data to CSV
-save_lidar_data_to_csv('lidar_data.csv')
 
 CrcTable = [
 0x00, 0x4d, 0x9a, 0xd7, 0x79, 0x34, 0xe3,
@@ -124,3 +104,24 @@ def check_packet(packet):
     for b in packet:
         crc = CrcTable[(crc ^ b) & 0xff]
     return crc
+
+def save_lidar_data_to_csv(filename):
+    scan = readLidarData('/dev/ttyUSB0')
+    
+    if scan:
+        angles = np.linspace(scan['start_angle'], scan['end_angle'], 12)
+        x_coords = (scan['ranges'] * np.cos(np.deg2rad(angles))).reshape(-1, order='F') / 1000
+        y_coords = (scan['ranges'] * np.sin(np.deg2rad(angles))).reshape(-1, order='F') / 1000
+        print(np.vstack((x_coords, y_coords).T))
+        # Write data to CSV file
+        with open(filename, 'w', newline='') as csvfile:
+            csvwriter = csv.writer(csvfile)
+            csvwriter.writerow(['x', 'y'])
+            for x, y in zip(x_coords, y_coords):
+                csvwriter.writerow([float(x), float(y)])  # Ensure data is saved as plain floats
+        print(f"Data saved to {filename}")
+    else:
+        print("No data to save.")
+
+# Save data to CSV
+save_lidar_data_to_csv('lidar_data.csv')
