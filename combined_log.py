@@ -47,7 +47,7 @@ def readLidarData(port, numPackets=38*3):
         data = np.frombuffer(header + ser.read(46) + ser.read(47 * (numPackets - 1)), dtype=np.uint8).reshape((-1,47))
         
         # Filter data by checking checksums for invalid data
-        # data = np.where(lambda p: check_packet(p[::-2]) == p[-1], data)
+       # data = np.where(lambda p: check_packet(p[::-2]) == p[-1], data)
 
         # Create a dictionary to store the scan data
         scan = {}
@@ -744,7 +744,7 @@ if __name__ == "__main__":
                         x_coords = (lidar_scan['ranges'] * np.cos(np.deg2rad(angles))).reshape(-1, order='F') / 1000
                         y_coords = (lidar_scan['ranges'] * np.sin(np.deg2rad(angles))).reshape(-1, order='F') / 1000
                         packed_coords = []
-                        for i in range(x_coords):
+                        for i in range(len(x_coords)):
                             packed_coords.extend([x_coords[i], y_coords[i]])
                         writer.writerow([
                             time.monotonic(),
@@ -765,4 +765,5 @@ if __name__ == "__main__":
             line_reader.shutdown()
         if update_thread is not None:
             update_thread.join()  # wait for thread to end
+
 
