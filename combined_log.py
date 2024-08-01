@@ -47,7 +47,7 @@ def readLidarData(port, numPackets=38*3):
         data = np.frombuffer(header + ser.read(46) + ser.read(47 * (numPackets - 1)), dtype=np.uint8).reshape((-1,47))
         
         # Filter data by checking checksums for invalid data
-        data = np.where(lambda p: check_packet(p[::-2]) == p[-1], data)
+        # data = np.where(lambda p: check_packet(p[::-2]) == p[-1], data)
 
         # Create a dictionary to store the scan data
         scan = {}
